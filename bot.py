@@ -32,7 +32,7 @@ async def checklist(ctx):
                 dic = json.loads(f.read())
                 await bot.say("There are currently " + str(len(dic)) + " users and their roles saved in `roles.json`!")
         except Exception as error:
-            await bot.say("Some kind of error happened.\n"
+            await bot.say("Error occurred.\n"
                           "```" + str(error) + "```")
     else:
         await bot.say("You are not an admin of this bot.")
