@@ -63,6 +63,8 @@ async def readd(ctx):
                 except Exception as error:
                     with open("logs.txt", "a") as f:
                         f.write(str(error) + "\n\n")
+        await bot.say("Done. I've added everyone's roles back. Shutting myself down.")
+        await bot.close()
     else:
         await bot.say("You are not an admin of this bot.")
 
