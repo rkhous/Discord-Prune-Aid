@@ -44,29 +44,33 @@ async def delete(ctx):
             dic = json.loads(f.read())
             for n in dic:
                 try:
-                    await bot.remove_roles(n, dic[n])
+                    for roles in dic[n]:
+                        await bot.remove_roles(discord.utils.get(ctx.message.server.members, id=n), discord.utils.get(ctx.message.server.roles, id=roles))
+                        print("removed role from user " + n)
                 except Exception as error:
                     with open("logs.txt", "a") as f:
                         f.write(str(error) + "\n\n")
+        await bot.say("Done. Removed all roles.")
     else:
-        await bot.say("You are not an admin of this bot.")
+        await bot.say("You are not an admin of this server.")
 
 @bot.command(pass_context=True)
 async def readd(ctx):
     if ctx.message.author.id == admin_id:
-        await bot.say("Re-adding roles...")
         with open("roles.json", "r") as f:
             dic = json.loads(f.read())
             for n in dic:
                 try:
-                    await bot.add_roles(n, dic[n])
+                    for roles in dic[n]:
+                        await bot.add_roles(discord.utils.get(ctx.message.server.members, id=n), discord.utils.get(ctx.message.server.roles, id=roles))
                 except Exception as error:
                     with open("logs.txt", "a") as f:
                         f.write(str(error) + "\n\n")
+                    print(error)
         await bot.say("Done. I've added everyone's roles back. Shutting myself down.")
         await bot.close()
     else:
-        await bot.say("You are not an admin of this bot.")
+        await bot.say("You are not an admin of this server.")
 
 
 
