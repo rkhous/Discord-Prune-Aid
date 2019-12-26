@@ -1,3 +1,6 @@
+### discord.py version 0.16.12
+### Python 3.6
+
 import discord
 from discord.ext import commands
 import json
